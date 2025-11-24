@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>BMI,Area,and Age Calculator</h1>
+
+    <!--BMI-->
+    weight (kg) :<input id="40"><br>
+    height (m) :,<input id="15"><br>
+    <button onclick="calBMI ()">Calculate BMI</button>
+        <p  id="bmi result"></p>
+
+    <!--Area-->
+    Length: <input  id="20"><br>
+    Width:  <input  id="35"><br>
+    <button onclick="calcArea ()">Calculate Area</button>
+    <p id="areaResult"></p>
+
+    <!--Age-->
+    Birth Year: <input id="2013"><br>
+    <button onclick="calcAge ()">Calculate Age</button>
+    <p id="ageResult"></p>
+
+
+    <script>
+        function calcBMI() {
+            let w=document.getElementById("70");
+            let h=document.getElementById("15");
+            let Bmi =w/(h*h);
+            document.getElementById("bmiResult").inner
+        }
+
+        function calcArea() {
+            let l=document.getElementById("20");
+            let w=document.getElementById("35");
+            let area= l*w;
+            document.getElementById("ageResult");
+        }
+
+        function calcAge() {
+            let y= document.getElementById("2013");
+            let age= new Date().getFullYear() - y;
+            document.getElementById("ageResult").inner
+        }
+        
+    </script>
+  </body>
+</html>
