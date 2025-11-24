@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Clone - Enhanced Responsive Deals Page</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use Inter font -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light gray background */
+        }
+        /* Custom styles for the search bar dropdown */
+        .search-dropdown {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            border-right: 1px solid #ccc;
+        }
+        /* Custom background for the deals sections */
+        .deals-orange-bg {
+            background-color: #c95111; /* Deeper Amazon orange/red for contrast */
+        }
+        
+        /* Custom scrollbar for carousels */
+        .carousel-container {
+            overflow-x: scroll;
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+            scroll-behavior: smooth;
+        }
+        .carousel-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        /* Enhanced Product Card Styling */
+        .product-card {
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle initial shadow */
+        }
+        .product-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Deeper shadow on hover */
+            border-color: #ff6a00; /* Subtle hover border color */
+        }
+        
+        /* Hero Banner Gradient Effect */
+        .hero-banner {
+            background: linear-gradient(90deg, #ff9900 0%, #ff6a00 100%);
+        }
+
+    </style>
+    <!-- Configure Tailwind to use Amazon-like colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        amazonBlue: '#131921',
+                        amazonYellow: '#febd69',
+                        amazonDark: '#232f3e',
+                        amazonOrange: '#ff6a00',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide icons for clean UI elements -->
+    <script type="module">
+        import { createIcons, Search, MapPin, Menu, ShoppingCart, User, ChevronDown, ChevronLeft, ChevronRight, X, Heart, Star, Plus } from 'https://cdn.jsdelivr.net/npm/lucide-esm@latest/umd/lucide-esm.js';
+        createIcons({ icons: { Search, MapPin, Menu, ShoppingCart, User, ChevronDown, ChevronLeft, ChevronRight, X, Heart, Star, Plus } });
+    </script>
+</head>
+<body>
+
+    <!--
+    ======================================
+    1. TOP HEADER NAVIGATION (amazonBlue)
+    ======================================
+    -->
+    <header class="sticky top-0 z-50">
+        <div class="flex items-center bg-amazonBlue text-white p-1.5 sm:p-2.5">
+            <!-- Logo & Deliver To -->
+            <div class="flex items-center space-x-2 mr-1 sm:mr-4">
+                <img src="https://placehold.co/100x30/131921/FFFFFF?text=amazon" alt="Amazon Logo" class="h-6 sm:h-8 object-contain cursor-pointer mt-1">
+                <div class="hidden md:flex items-center text-xs space-x-1 p-1 cursor-pointer hover:border hover:border-white rounded-sm">
+                    <i data-lucide="map-pin" class="w-4 h-4"></i>
+                    <div>
+                        <p class="text-gray-400 leading-none">Deliver to</p>
+                        <p class="font-bold leading-none">Pakistan</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search Bar (Desktop/Tablet) -->
+            <div class="flex-grow hidden md:flex items-center h-10 rounded-md overflow-hidden bg-white">
+                <select class="search-dropdown bg-gray-200 text-gray-700 p-2 text-xs h-full focus:outline-none">
+                    <option>All</option>
+                    <option>Deals</option>
+                    <option>Electronics</option>
+                    <option>Books</option>
+                </select>
+                <input type="text" placeholder="Search Amazon" class="p-2 h-full w-6/12 flex-grow text-black focus:outline-none text-sm">
+                <button class="w-12 h-full bg-amazonYellow flex items-center justify-center hover:bg-yellow-400 transition">
+                    <i data-lucide="search" class="w-5 h-5 text-amazonBlue"></i>
+                </button>
+            </div>
+            
+            <!-- Right Section: Language, Account, Cart -->
+            <div class="flex items-center text-xs space-x-3 sm:space-x-6 mx-3 whitespace-nowrap">
+                
+                <!-- Language -->
+                <div class="hidden lg:flex items-center cursor-pointer hover:border hover:border-white rounded-sm p-1">
+                    <img src="https://placehold.co/16x12/131921/FFFFFF?text=EN" alt="US Flag" class="mr-1">
+                    <p class="font-bold">EN</p>
+                    <i data-lucide="chevron-down" class="w-3 h-3 ml-0.5"></i>
+                </div>
+
+                <!-- Account & Lists -->
+                <div class="cursor-pointer hover:border hover:border-white rounded-sm p-1 leading-tight">
+                    <p class="text-gray-400">Hello, sign in</p>
+                    <p class="font-extrabold flex items-center">
+                        Account & Lists
+                        <i data-lucide="chevron-down" class="w-3 h-3 ml-0.5"></i>
+                    </p>
+                </div>
+
+                <!-- Orders -->
+                <div class="hidden sm:inline cursor-pointer hover:border hover:border-white rounded-sm p-1 leading-tight">
+                    <p class="text-gray-400">Returns</p>
+                    <p class="font-extrabold">& Orders</p>
+                </div>
+
+                <!-- Cart -->
+                <div class="relative flex items-center cursor-pointer hover:border hover:border-white rounded-sm p-1">
+                    <i data-lucide="shopping-cart" class="w-8 h-8"></i>
+                    <span class="absolute top-0 right-0 md:right-4 h-4 w-4 bg-amazonYellow text-center rounded-full text-black font-bold text-xs">0</span>
+                    <p class="hidden sm:inline font-extrabold mt-2 ml-1">Cart</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Bar (Mobile Only) -->
+        <div class="flex md:hidden items-center h-10 p-2 bg-white">
+            <input type="text" placeholder="Search Amazon" class="p-2 h-full w-full flex-grow rounded-l-md text-black focus:outline-none text-sm border border-gray-300">
+            <button class="w-10 h-full bg-amazonYellow flex items-center justify-center rounded-r-md hover:bg-yellow-400 transition">
+                <i data-lucide="search" class="w-5 h-5 text-amazonBlue"></i>
+            </button>
+        </div>
+
+        <!-- 
+        ======================================
+        2. BOTTOM NAV (amazonDark)
+        ======================================
+        -->
+        <div class="flex items-center space-x-3 p-2 pl-4 bg-amazonDark text-white text-sm shadow-md">
+            <div class="flex items-center space-x-1 cursor-pointer hover:border hover:border-white rounded-sm p-1">
+                <i data-lucide="menu" class="w-5 h-5"></i>
+                <p>All</p>
+            </div>
+            <p class="cursor-pointer hover:border hover:border-white rounded-sm p-1 font-bold">Black Friday</p>
+            <p class="cursor-pointer hover:border hover:border-white rounded-sm p-1 hidden sm:inline-flex">Prime Video</p>
+            <p class="cursor-pointer hover:border hover:border-white rounded-sm p-1 hidden sm:inline-flex">Registry</p>
+            <p class="cursor-pointer hover:border hover:border-white rounded-sm p-1 hidden sm:inline-flex">Gift Cards</p>
+            <p class="cursor-pointer hover:border hover:border-white rounded-sm p-1 hidden lg:inline-flex">Customer Service</p>
+            <p class="cursor-pointer hover:border hover:border-white rounded-sm p-1 hidden lg:inline-flex">Sell</p>
+
+            <p class="ml-auto font-extrabold text-sm cursor-pointer hover:border hover:border-white rounded-sm p-1">
+                Shop Black Friday deals
+            </p>
+        </div>
+    </header>
+
+    <main>
+        <!-- 
+        ======================================
+        3. HERO BANNER
+        ======================================
+        -->
+        <div class="w-full hero-banner text-white p-8 sm:p-12 flex justify-start items-center relative overflow-hidden">
+            <div class="relative z-10">
+                <h1 class="text-4xl sm:text-6xl font-extrabold mb-2">Black Friday Week deals</h1>
+                <h2 class="text-2xl sm:text-3xl font-light">Up to 45% off</h2>
+            </div>
+            <!-- Mock image assets/props for visual effect -->
+            <div class="absolute inset-0 z-0 opacity-20 sm:opacity-100 flex justify-end items-center pointer-events-none">
+                <img src="https://placehold.co/600x200/c95111/FFFFFF?text=DEAL+ASSETS" alt="Deals Assets" class="h-full w-auto object-cover opacity-10">
+            </div>
+        </div>
+
+        <!-- 
+        ======================================
+        4. CATEGORY CAROUSEL (MOCK)
+        ======================================
+        -->
+        <section class="bg-white p-4 shadow-lg rounded-b-lg mb-4">
+            <div class="relative">
+                <div class="carousel-container flex space-x-4 pb-2">
+                    <!-- Category Item Template (using new descriptive placeholders from your images) -->
+                    <div class="flex-shrink-0 w-24 sm:w-32 text-center cursor-pointer hover:text-amazonOrange transition duration-150">
+                        <div class="bg-yellow-100 rounded-lg p-2 overflow-hidden border border-yellow-200 shadow-sm">
+                            <img src="https://placehold.co/80x80/fef3c7/92400e?text=Prime+Video" alt="Prime Video" class="mx-auto rounded-md">
+                        </div>
+                        <p class="text-xs font-medium mt-1">Prime Video</p>
+                    </div>
+
+                    <div class="flex-shrink-0 w-24 sm:w-32 text-center cursor-pointer hover:text-amazonOrange transition duration-150">
+                        <div class="bg-gray-100 rounded-lg p-2 overflow-hidden border border-gray-200 shadow-sm">
+                            <img src="https://placehold.co/80x80/d1d5db/1f2937?text=Kitchen" alt="Kitchen Appliances" class="mx-auto rounded-md">
+                        </div>
+                        <p class="text-xs font-medium mt-1">Kitchen</p>
+                    </div>
+                    <div class="flex-shrink-0 w-24 sm:w-32 text-center cursor-pointer hover:text-amazonOrange transition duration-150">
+                        <div class="bg-gray-100 rounded-lg p-2 overflow-hidden border border-gray-200 shadow-sm">
+                            <img src="https://placehold.co/80x80/9ca3af/1f2937?text=Shoes" alt="Running Shoes" class="mx-auto rounded-md">
+                        </div>
+                        <p class="text-xs font-medium mt-1">Running Shoes</p>
+                    </div>
+                    <div class="flex-shrink-0 w-24 sm:w-32 text-center cursor-pointer hover:text-amazonOrange transition duration-150">
+                        <div class="bg-gray-100 rounded-lg p-2 overflow-hidden border border-gray-200 shadow-sm">
+                            <img src="https://placehold.co/80x80/374151/f9fafb?text=Laptops" alt="Laptops" class="mx-auto rounded-md">
+                        </div>
+                        <p class="text-xs font-medium mt-1">Laptops</p>
+                    </div>
+                    <div class="flex-shrink-0 w-24 sm:w-32 text-center cursor-pointer hover:text-amazonOrange transition duration-150">
+                        <div class="bg-gray-100 rounded-lg p-2 overflow-hidden border border-gray-200 shadow-sm">
+                            <img src="https://placehold.co/80x80/f0f0f0/333?text=Tablet" alt="Fire Tablets" class="mx-auto rounded-md">
+                        </div>
+                        <p class="text-xs font-medium mt-1">Fire Tablets</p>
+                    </div>
+                    <div class="flex-shrink-0 w-24 sm:w-32 text-center cursor-pointer hover:text-amazonOrange transition duration-150">
+                        <div class="bg-gray-100 rounded-lg p-2 overflow-hidden border border-gray-200 shadow-sm">
+                            <img src="https://placehold.co/80x80/f0f0f0/333?text=Gaming" alt="Gaming" class="mx-auto rounded-md">
+                        </div>
+                        <p class="text-xs font-medium mt-1">Gaming Gear</p>
+                    </div>
+                    <div class="flex-shrink-0 w-24 sm:w-32 text-center cursor-pointer hover:text-amazonOrange transition duration-150">
+                        <div class="bg-gray-100 rounded-lg p-2 overflow-hidden border border-gray-200 shadow-sm">
+                            <img src="https://placehold.co/80x80/f0f0f0/333?text=Stock" alt="Stocking Stuffers" class="mx-auto rounded-md">
+                        </div>
+                        <p class="text-xs font-medium mt-1">Stocking Stuffers</p>
+                    </div>
+                    <div class="flex-shrink-0 w-24 sm:w-32 text-center cursor-pointer hover:text-amazonOrange transition duration-150">
+                        <div class="bg-gray-100 rounded-lg p-2 overflow-hidden border border-gray-200 shadow-sm">
+                            <img src="https://placehold.co/80x80/f0f0f0/333?text=Kindle" alt="Devices" class="mx-auto rounded-md">
+                        </div>
+                        <p class="text-xs font-medium mt-1">Kindle Devices</p>
+                    </div>
+                    <div class="flex-shrink-0 w-24 sm:w-32 text-center cursor-pointer hover:text-amazonOrange transition duration-150">
+                        <div class="bg-gray-100 rounded-lg p-2 overflow-hidden border border-gray-200 shadow-sm">
+                            <img src="https://placehold.co/80x80/f0f0f0/333?text=Deals" alt="Top 100+ Deals" class="mx-auto rounded-md">
+                        </div>
+                        <p class="text-xs font-medium mt-1">Top 100+ Deals</p>
+                    </div>
+                    <!-- Navigation arrows overlay - functional via JS in a real app, mock here -->
+                    <button class="absolute left-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-r-lg shadow-xl hidden sm:block border border-gray-200 hover:scale-110 transition">
+                        <i data-lucide="chevron-left" class="w-6 h-6 text-gray-700"></i>
+                    </button>
+                    <button class="absolute right-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-l-lg shadow-xl hidden sm:block border border-gray-200 hover:scale-110 transition">
+                        <i data-lucide="chevron-right" class="w-6 h-6 text-gray-700"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 
+        ======================================
+        5. PRODUCT GRID SECTIONS (TODAY'S BIG DEALS)
+        ======================================
+        -->
+        <section class="p-4 sm:p-6 space-y-8">
+
+            <!-- Today's Big Deals - Carousel Style -->
+            <div class="bg-white p-4 rounded-lg shadow-xl">
+                <h3 class="text-xl font-bold mb-4">Today's big deals</h3>
+                <div class="relative">
+                    <div class="carousel-container flex space-x-4 pb-4">
+                        
+                        <!-- Fixed promotional block -->
+                        <div class="flex-shrink-0 w-72 h-80 bg-amazonOrange rounded-lg overflow-hidden relative">
+                            <img src="https://placehold.co/288x320/c95111/FFFFFF?text=SEASONAL+FAVORITES" alt="Winter Favorites" class="absolute inset-0 object-cover opacity-20">
+                            <div class="p-6 h-full flex flex-col justify-center items-start text-white relative z-10">
+                                <h4 class="text-4xl font-extrabold leading-none mb-1">Up to</h4>
+                                <h4 class="text-8xl font-extrabold leading-none mb-4">50% off</h4>
+                                <p class="text-lg font-semibold">seasonal winter favorites</p>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 1: Puffer Jacket (from uploaded image) -->
+                        <div class="product-card flex-shrink-0 w-64 bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer">
+                            <img src="https://placehold.co/200x200/94a3b8/FFFFFF?text=Puffer+Jacket" alt="Blue Puffer Jacket" class="w-full h-40 object-contain mb-3 mx-auto">
+                            <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">Columbia Men's Puffer Jacket Water Resistant</p>
+                            <div class="flex items-center space-x-2 text-left mb-1">
+                                <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">63% off</span>
+                                <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                            </div>
+                            <p class="text-lg font-bold text-left">
+                                PKR <span class="text-xl">2,825</span><sup>78</sup>
+                            </p>
+                            <p class="text-xs text-gray-500 text-left">List: <span class="line-through">PKR 7,629.52</span></p>
+                        </div>
+
+                        <!-- Product Card 2: Espresso Machine (from uploaded image) -->
+                        <div class="product-card flex-shrink-0 w-64 bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer">
+                            <img src="https://placehold.co/200x200/f8f8f8/16a34a?text=Espresso+Machine" alt="Espresso Machine" class="w-full h-40 object-contain mb-3 mx-auto">
+                            <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">De'Longhi Automatic Espresso & Cappuccino Machine</p>
+                            <div class="flex items-center space-x-2 text-left mb-1">
+                                <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">33% off</span>
+                                <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                            </div>
+                            <p class="text-lg font-bold text-left">
+                                PKR <span class="text-xl">69,442</span><sup>81</sup>
+                            </p>
+                            <p class="text-xs text-gray-500 text-left">List: <span class="line-through">PKR 104,270.18</span></p>
+                        </div>
+                        
+                        <!-- Product Card 3: Robotic Vacuum (from uploaded image) -->
+                        <div class="product-card flex-shrink-0 w-64 bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer">
+                            <img src="https://placehold.co/200x200/e0f2f1/000000?text=Robotic+Vacuum" alt="Robotic Vacuum" class="w-full h-40 object-contain mb-3 mx-auto">
+                            <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">iRobot Roomba J7+ Self-Emptying Robotic Vacuum</p>
+                            <div class="flex items-center space-x-2 text-left mb-1">
+                                <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">35% off</span>
+                                <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                            </div>
+                            <p class="text-lg font-bold text-left">
+                                PKR <span class="text-xl">28,254</span><sup>67</sup>
+                            </p>
+                            <p class="text-xs text-gray-500 text-left">List: <span class="line-through">PKR 42,583.42</span></p>
+                        </div>
+                        
+                        <!-- Product Card 4: Space Heater (from uploaded image) -->
+                        <div class="product-card flex-shrink-0 w-64 bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer">
+                            <img src="https://placehold.co/200x200/f8f8f8/e34518?text=Space+Heater" alt="Space Heater" class="w-full h-40 object-contain mb-3 mx-auto">
+                            <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">Lasko Ceramic Tower Heater with Digital Display</p>
+                            <div class="flex items-center space-x-2 text-left mb-1">
+                                <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">15% off</span>
+                                <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                            </div>
+                            <p class="text-lg font-bold text-left">
+                                PKR <span class="text-xl">9,604</span><sup>12</sup>
+                            </p>
+                            <p class="text-xs text-gray-500 text-left">List: <span class="line-through">PKR 11,300.17</span></p>
+                        </div>
+
+                        <!-- Product Card 5: Luggage Set (from uploaded image) -->
+                        <div class="product-card flex-shrink-0 w-64 bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer">
+                            <img src="https://placehold.co/200x200/374151/f9fafb?text=Luggage+Set" alt="Hardshell Luggage Set" class="w-full h-40 object-contain mb-3 mx-auto">
+                            <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">Samsonite Hardshell Spinner Luggage 3-Piece Set</p>
+                            <div class="flex items-center space-x-2 text-left mb-1">
+                                <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">44% off</span>
+                                <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                            </div>
+                            <p class="text-lg font-bold text-left">
+                                PKR <span class="text-xl">55,480</span><sup>98</sup>
+                            </p>
+                            <p class="text-xs text-gray-500 text-left">List: <span class="line-through">PKR 98,867.34</span></p>
+                        </div>
+                    </div>
+                    <!-- Right Arrow for Carousel -->
+                    <button class="absolute right-0 top-1/2 -translate-y-1/2 bg-white p-3 rounded-l-lg shadow-xl border border-gray-200 hover:bg-gray-100 transition">
+                        <i data-lucide="chevron-right" class="w-6 h-6 text-gray-700"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Premium Brands Under $100 - Carousel with Orange Header -->
+            <div class="deals-orange-bg text-white p-4 rounded-t-lg shadow-md">
+                <h3 class="text-xl font-bold">Premium Brands under $100</h3>
+            </div>
+            <div class="bg-white p-4 rounded-b-lg shadow-xl -mt-4">
+                <div class="relative">
+                    <div class="carousel-container flex space-x-4 pb-4">
+                        
+                        <!-- Product Card 1: Dual Air Fryer (from uploaded image) -->
+                        <div class="product-card flex-shrink-0 w-64 bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer">
+                            <img src="https://placehold.co/200x200/f8f8f8/e34518?text=Dual+Air+Fryer" alt="Dual Air Fryer" class="w-full h-40 object-contain mb-3 mx-auto">
+                            <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">Ninja Digital Dual-Zone Air Fryer, 7.6L Capacity</p>
+                            <div class="flex items-center space-x-2 text-left mb-1">
+                                <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">50% off</span>
+                                <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                            </div>
+                            <p class="text-lg font-bold text-left">
+                                PKR <span class="text-xl">25,428</span><sup>92</sup>
+                            </p>
+                            <p class="text-xs text-gray-500 text-left">List: <span class="line-through">PKR 50,860.67</span></p>
+                        </div>
+
+                        <!-- Product Card 2: Bed Frame (from uploaded image) -->
+                        <div class="product-card flex-shrink-0 w-64 bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer">
+                            <img src="https://placehold.co/200x200/964b00/FFFFFF?text=Wooden+Bed+Frame" alt="Wooden Bed Frame" class="w-full h-40 object-contain mb-3 mx-auto">
+                            <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">Zinus Suzanne Wooden Platform Bed Frame - Queen Size</p>
+                            <div class="flex items-center space-x-2 text-left mb-1">
+                                <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">15% off</span>
+                                <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                            </div>
+                            <p class="text-lg font-bold text-left">
+                                PKR <span class="text-xl">23,993</span><sup>44</sup>
+                            </p>
+                            <p class="text-xs text-gray-500 text-left">List: <span class="line-through">PKR 28,226.42</span></p>
+                        </div>
+                        
+                        <!-- Product Card 3: Clinique Cream -->
+                        <div class="product-card flex-shrink-0 w-64 bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer">
+                            <img src="https://placehold.co/200x200/f8f8f8/0e7490?text=Clinique+Cream" alt="Moisture Surge" class="w-full h-40 object-contain mb-3 mx-auto">
+                            <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">CLINIQUE Moisture Surge 100-Hour Auto-Replenishing Hydrator</p>
+                            <div class="flex items-center space-x-2 text-left mb-1">
+                                <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">30% off</span>
+                                <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                            </div>
+                            <p class="text-lg font-bold text-left">
+                                PKR <span class="text-xl">17,406</span><sup>62</sup>
+                            </p>
+                            <p class="text-xs text-gray-500 text-left">List: <span class="line-through">PKR 24,866.60</span></p>
+                        </div>
+                        
+                        <!-- Product Card 4: Serum -->
+                        <div class="product-card flex-shrink-0 w-64 bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer">
+                            <img src="https://placehold.co/200x200/f8f8f8/7e22ce?text=Hair+Serum" alt="Hair Serum" class="w-full h-40 object-contain mb-3 mx-auto">
+                            <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">The Ordinary Multi-Peptide Serum for Hair Density</p>
+                            <div class="flex items-center space-x-2 text-left mb-1">
+                                <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">30% off</span>
+                                <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                            </div>
+                            <p class="text-lg font-bold text-left">
+                                PKR <span class="text-xl">9,494</span><sup>52</sup>
+                            </p>
+                            <p class="text-xs text-gray-500 text-left">List: <span class="line-through">PKR 13,563.60</span></p>
+                        </div>
+
+                        <!-- Product Card 5: Magna-Tiles -->
+                        <div class="product-card flex-shrink-0 w-64 bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer">
+                            <img src="https://placehold.co/200x200/f8f8f8/e74c3c?text=Magna+Tiles" alt="Magna Tiles" class="w-full h-40 object-contain mb-3 mx-auto">
+                            <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">MAGNA-TILES Clear Colors 100 Piece Set</p>
+                            <div class="flex items-center space-x-2 text-left mb-1">
+                                <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">30% off</span>
+                                <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                            </div>
+                            <p class="text-lg font-bold text-left">
+                                PKR <span class="text-xl">9,887</span><sup>50</sup>
+                            </p>
+                            <p class="text-xs text-gray-500 text-left">List: <span class="line-through">PKR 14,125.92</span></p>
+                        </div>
+                    </div>
+                    <!-- Right Arrow for Carousel -->
+                    <button class="absolute right-0 top-1/2 -translate-y-1/2 bg-white p-3 rounded-l-lg shadow-xl border border-gray-200 hover:bg-gray-100 transition">
+                        <i data-lucide="chevron-right" class="w-6 h-6 text-gray-700"></i>
+                    </button>
+                </div>
+
+                <!-- Second Row of Products (Static Grid, adapted from screenshot) -->
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 pt-6 border-t mt-4">
+                    <!-- Product Card Template for Grid -->
+                    <div class="product-card bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer relative group">
+                        <!-- Add to cart button overlay -->
+                        <button class="absolute top-4 right-4 bg-amazonYellow text-amazonBlue p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md hover:scale-105">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                        </button>
+                        <img src="https://placehold.co/150x150/d3d3d3/000000?text=Gift+Watch" alt="Gift Set" class="w-full h-32 object-contain mb-3 mx-auto">
+                        <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">Coffee & Watch Gift Set for Him</p>
+                        <div class="flex items-center space-x-2 text-left mb-1">
+                            <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">15% off</span>
+                            <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                        </div>
+                        <p class="text-lg font-bold text-left">
+                            PKR <span class="text-base">84,063</span><sup>24</sup>
+                        </p>
+                    </div>
+
+                    <div class="product-card bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer relative group">
+                        <button class="absolute top-4 right-4 bg-amazonYellow text-amazonBlue p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md hover:scale-105">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                        </button>
+                        <img src="https://placehold.co/150x150/2c3e50/ecf0f1?text=AZUL+Game" alt="Board Game" class="w-full h-32 object-contain mb-3 mx-auto">
+                        <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">AZUL Board Game Strategy Tile Set</p>
+                        <div class="flex items-center space-x-2 text-left mb-1">
+                            <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">33% off</span>
+                            <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                        </div>
+                        <p class="text-lg font-bold text-left">
+                            PKR <span class="text-base">6,072</span><sup>54</sup>
+                        </p>
+                    </div>
+
+                    <div class="product-card bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer relative group">
+                        <button class="absolute top-4 right-4 bg-amazonYellow text-amazonBlue p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md hover:scale-105">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                        </button>
+                        <img src="https://placehold.co/150x150/1f2937/d1d5db?text=Gaming+Laptop" alt="Gaming Laptop" class="w-full h-32 object-contain mb-3 mx-auto">
+                        <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">ROG STRIX Gaming Laptop High-Performance Model</p>
+                        <div class="flex items-center space-x-2 text-left mb-1">
+                            <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">22% off</span>
+                            <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                        </div>
+                        <p class="text-lg font-bold text-left">
+                            PKR <span class="text-base">531,238</span><sup>17</sup>
+                        </p>
+                    </div>
+
+                    <div class="product-card bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer relative group">
+                        <button class="absolute top-4 right-4 bg-amazonYellow text-amazonBlue p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md hover:scale-105">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                        </button>
+                        <img src="https://placehold.co/150x150/f97316/FFFFFF?text=AA+Batteries" alt="AA Batteries" class="w-full h-32 object-contain mb-3 mx-auto">
+                        <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">Amazon Basics AA Batteries Alkaline Power, 32 Count</p>
+                        <div class="flex items-center space-x-2 text-left mb-1">
+                            <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">15% off</span>
+                            <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                        </div>
+                        <p class="text-lg font-bold text-left">
+                            PKR <span class="text-base">6,468</span><sup>14</sup>
+                        </p>
+                    </div>
+
+                    <div class="product-card bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer relative group">
+                        <button class="absolute top-4 right-4 bg-amazonYellow text-amazonBlue p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md hover:scale-105">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                        </button>
+                        <img src="https://placehold.co/150x150/1f2937/FFFFFF?text=Black+Hoodie" alt="Black Hoodie" class="w-full h-32 object-contain mb-3 mx-auto">
+                        <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">Men's Lightweight Full-Zip Hoodie Black</p>
+                        <div class="flex items-center space-x-2 text-left mb-1">
+                            <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">63% off</span>
+                            <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                        </div>
+                        <p class="text-lg font-bold text-left">
+                            PKR <span class="text-base">2,820</span><sup>10</sup>
+                        </p>
+                        <p class="text-xs text-gray-500 text-left">List: <span class="line-through">PKR 7,629.52</span></p>
+                    </div>
+
+                    <div class="product-card bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer relative group">
+                        <button class="absolute top-4 right-4 bg-amazonYellow text-amazonBlue p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md hover:scale-105">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                        </button>
+                        <img src="https://placehold.co/150x150/964b00/FFFFFF?text=Suede+Boots" alt="Women's Boots" class="w-full h-32 object-contain mb-3 mx-auto">
+                        <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">Women's Knee-High Suede Boots</p>
+                        <div class="flex items-center space-x-2 text-left mb-1">
+                            <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">15% off</span>
+                            <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                        </div>
+                        <p class="text-lg font-bold text-left">
+                            PKR <span class="text-base">26,177</span><sup>75</sup>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stocking Stuffers under $15 - Carousel with Orange Header -->
+            <div class="deals-orange-bg text-white p-4 rounded-t-lg shadow-md">
+                <h3 class="text-xl font-bold">Stocking Stuffers under $15</h3>
+            </div>
+            <div class="bg-white p-4 rounded-b-lg shadow-xl -mt-4">
+                <div class="relative">
+                    <div class="carousel-container flex space-x-4 pb-4">
+                        
+                        <!-- Product Card 1: Face Masks -->
+                        <div class="product-card flex-shrink-0 w-64 bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer">
+                            <img src="https://placehold.co/200x200/f8f8f8/f43f5e?text=Bio+Masks" alt="Face Masks" class="w-full h-40 object-contain mb-3 mx-auto">
+                            <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">Biodance Bio-Collagen Real Deep Mask 10-Pack</p>
+                            <div class="flex items-center space-x-2 text-left mb-1">
+                                <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">30% off</span>
+                                <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                            </div>
+                            <p class="text-lg font-bold text-left">
+                                PKR <span class="text-xl">3,758</span><sup>25</sup>
+                            </p>
+                            <p class="text-xs text-gray-500 text-left">List: <span class="line-through">PKR 5,368.92</span></p>
+                        </div>
+
+                        <!-- Product Card 2: Eye Massager -->
+                        <div class="product-card flex-shrink-0 w-64 bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer">
+                            <img src="https://placehold.co/200x200/f8f8f8/34d399?text=Eye+Massager" alt="Eye Massager" class="w-full h-40 object-contain mb-3 mx-auto">
+                            <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">Jade Roller and Eye Massager Rings Set</p>
+                            <div class="flex items-center space-x-2 text-left mb-1">
+                                <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">31% off</span>
+                                <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                            </div>
+                            <p class="text-lg font-bold text-left">
+                                PKR <span class="text-xl">4,094</span><sup>51</sup>
+                            </p>
+                            <p class="text-xs text-gray-500 text-left">List: <span class="line-through">PKR 5,919.95</span></p>
+                        </div>
+                        
+                        <!-- Product Card 3: Eyeshadow Palette -->
+                        <div class="product-card flex-shrink-0 w-64 bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer">
+                            <img src="https://placehold.co/200x200/f8f8f8/ec4899?text=Eyeshadow" alt="Eyeshadow" class="w-full h-40 object-contain mb-3 mx-auto">
+                            <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">20-Color Matte & Shimmer Eyeshadow Palette</p>
+                            <div class="flex items-center space-x-2 text-left mb-1">
+                                <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">50% off</span>
+                                <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                            </div>
+                            <p class="text-lg font-bold text-left">
+                                PKR <span class="text-xl">4,238</span><sup>62</sup>
+                            </p>
+                            <p class="text-xs text-gray-500 text-left">List: <span class="line-through">PKR 8,477.25</span></p>
+                        </div>
+                        
+                        <!-- Product Card 4: Lip Balm -->
+                        <div class="product-card flex-shrink-0 w-64 bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer">
+                            <img src="https://placehold.co/200x200/f8f8f8/f79008?text=Lip+Balm" alt="Lip Balm" class="w-full h-40 object-contain mb-3 mx-auto">
+                            <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">Tinted Moisturizing Lip Balm Stick - Nude Pink</p>
+                            <div class="flex items-center space-x-2 text-left mb-1">
+                                <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">50% off</span>
+                                <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                            </div>
+                            <p class="text-lg font-bold text-left">
+                                PKR <span class="text-xl">3,390</span><sup>90</sup>
+                            </p>
+                            <p class="text-xs text-gray-500 text-left">List: <span class="line-through">PKR 6,781.80</span></p>
+                        </div>
+
+                        <!-- Product Card 5: Cica Mask -->
+                        <div class="product-card flex-shrink-0 w-64 bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer">
+                            <img src="https://placehold.co/200x200/f8f8f8/3b82f6?text=Cica+Mask" alt="Cica Mask" class="w-full h-40 object-contain mb-3 mx-auto">
+                            <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">CICA BRAY Soothing Repair Mask Pack</p>
+                            <div class="flex items-center space-x-2 text-left mb-1">
+                                <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">49% off</span>
+                                <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                            </div>
+                            <p class="text-lg font-bold text-left">
+                                PKR <span class="text-xl">3,249</span><sup>61</sup>
+                            </p>
+                            <p class="text-xs text-gray-500 text-left">List: <span class="line-through">PKR 6,329.68</span></p>
+                        </div>
+                    </div>
+                    <!-- Right Arrow for Carousel -->
+                    <button class="absolute right-0 top-1/2 -translate-y-1/2 bg-white p-3 rounded-l-lg shadow-xl border border-gray-200 hover:bg-gray-100 transition">
+                        <i data-lucide="chevron-right" class="w-6 h-6 text-gray-700"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 
+            ======================================
+            ELECTRONICS & GADGETS
+            ======================================
+            -->
+            <!-- Electronics & Gadgets - Carousel with Orange Header -->
+            <div class="deals-orange-bg text-white p-4 rounded-t-lg shadow-md">
+                <h3 class="text-xl font-bold">Electronics & Gadgets Black Friday</h3>
+            </div>
+            <div class="bg-white p-4 rounded-b-lg shadow-xl -mt-4">
+                <div class="relative">
+                    <div class="carousel-container flex space-x-4 pb-4">
+                        
+                        <!-- Product Card 1: Wireless Headphones (from uploaded image) -->
+                        <div class="product-card flex-shrink-0 w-64 bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer">
+                            <img src="https://placehold.co/200x200/f8f8f8/000000?text=Wireless+Headphones" alt="Noise Cancelling Headphones" class="w-full h-40 object-contain mb-3 mx-auto">
+                            <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">Bose QuietComfort Wireless Noise Cancelling Headphones</p>
+                            <div class="flex items-center space-x-2 text-left mb-1">
+                                <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">40% off</span>
+                                <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                            </div>
+                            <p class="text-lg font-bold text-left">
+                                PKR <span class="text-xl">45,174</span><sup>20</sup>
+                            </p>
+                            <p class="text-xs text-gray-500 text-left">List: <span class="line-through">PKR 75,290.33</span></p>
+                        </div>
+
+                        <!-- Product Card 2: Smartwatch (from uploaded image) -->
+                        <div class="product-card flex-shrink-0 w-64 bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer">
+                            <img src="https://placehold.co/200x200/f8f8f8/000000?text=Square+Smartwatch" alt="Fitness Smartwatch" class="w-full h-40 object-contain mb-3 mx-auto">
+                            <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">Apple Watch Series 9 GPS + Cellular (45mm)</p>
+                            <div class="flex items-center space-x-2 text-left mb-1">
+                                <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">30% off</span>
+                                <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                            </div>
+                            <p class="text-lg font-bold text-left">
+                                PKR <span class="text-xl">14,957</span><sup>65</sup>
+                            </p>
+                            <p class="text-xs text-gray-500 text-left">List: <span class="line-through">PKR 21,368.07</span></p>
+                        </div>
+                        
+                        <!-- Product Card 3: Portable Speaker -->
+                        <div class="product-card flex-shrink-0 w-64 bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer">
+                            <img src="https://placehold.co/200x200/f8f8f8/10b981?text=Portable+Speaker" alt="JBL Speaker" class="w-full h-40 object-contain mb-3 mx-auto">
+                            <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">JBL Flip 6 Waterproof Portable Bluetooth Speaker</p>
+                            <div class="flex items-center space-x-2 text-left mb-1">
+                                <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">25% off</span>
+                                <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                            </div>
+                            <p class="text-lg font-bold text-left">
+                                PKR <span class="text-xl">19,891</span><sup>44</sup>
+                            </p>
+                            <p class="text-xs text-gray-500 text-left">List: <span class="line-through">PKR 26,521.92</span></p>
+                        </div>
+                        
+                        <!-- Product Card 4: Security Camera -->
+                        <div class="product-card flex-shrink-0 w-64 bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer">
+                            <img src="https://placehold.co/200x200/f8f8f8/374151?text=Ring+Camera" alt="Security Camera" class="w-full h-40 object-contain mb-3 mx-auto">
+                            <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">Ring Home Security Camera System 2-Pack</p>
+                            <div class="flex items-center space-x-2 text-left mb-1">
+                                <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">35% off</span>
+                                <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                            </div>
+                            <p class="text-lg font-bold text-left">
+                                PKR <span class="text-xl">31,702</span><sup>98</sup>
+                            </p>
+                            <p class="text-xs text-gray-500 text-left">List: <span class="line-through">PKR 48,773.81</span></p>
+                        </div>
+
+                        <!-- Product Card 5: Power Bank -->
+                        <div class="product-card flex-shrink-0 w-64 bg-white border border-gray-200 rounded-lg p-3 text-center cursor-pointer">
+                            <img src="https://placehold.co/200x200/f8f8f8/2563eb?text=Power+Bank" alt="Portable Charger" class="w-full h-40 object-contain mb-3 mx-auto">
+                            <p class="text-sm text-left mb-2 leading-snug hover:text-amazonOrange">Anker 20000mAh Portable Charger Power Bank</p>
+                            <div class="flex items-center space-x-2 text-left mb-1">
+                                <span class="bg-red-700 text-white text-xs font-bold px-2 py-0.5 rounded-sm">20% off</span>
+                                <span class="text-red-700 text-xs font-bold">Black Friday Deal</span>
+                            </div>
+                            <p class="text-lg font-bold text-left">
+                                PKR <span class="text-xl">7,358</span><sup>99</sup>
+                            </p>
+                            <p class="text-xs text-gray-500 text-left">List: <span class="line-through">PKR 9,198.74</span></p>
+                        </div>
+                    </div>
+                    <!-- Right Arrow for Carousel -->
+                    <button class="absolute right-0 top-1/2 -translate-y-1/2 bg-white p-3 rounded-l-lg shadow-xl border border-gray-200 hover:bg-gray-100 transition">
+                        <i data-lucide="chevron-right" class="w-6 h-6 text-gray-700"></i>
+                    </button>
+                </div>
+            </div>
+
+
+            <!-- Other Popular Sections (Grid Layout Adaptation) -->
+            <div class="space-y-6">
+                <h3 class="text-xl font-bold">Top picks for Pakistan</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 bg-white p-4 rounded-lg shadow-xl">
+                    <!-- Product Card Template for Grid -->
+                    <div class="product-card p-3 text-center cursor-pointer transition-transform hover:scale-[1.03] duration-200">
+                        <img src="https://placehold.co/150x150/f8f8f8/e34518?text=Gaming+Wheel" alt="Racing Wheel" class="w-full h-32 object-contain mb-3 mx-auto">
+                        <p class="text-sm mt-1 leading-snug hover:text-amazonOrange">Pro Racing Wheel and Pedal Set</p>
+                    </div>
+                    <div class="product-card p-3 text-center cursor-pointer transition-transform hover:scale-[1.03] duration-200">
+                        <img src="https://placehold.co/150x150/f8f8f8/374151?text=Power+Tools" alt="Power Tools" class="w-full h-32 object-contain mb-3 mx-auto">
+                        <p class="text-sm mt-1 leading-snug hover:text-amazonOrange">DEWALT Cordless Drill and Driver Kit</p>
+                    </div>
+                    <div class="product-card p-3 text-center cursor-pointer transition-transform hover:scale-[1.03] duration-200">
+                        <img src="https://placehold.co/150x150/f8f8f8/ec4899?text=Body+Lotion" alt="Body Lotion" class="w-full h-32 object-contain mb-3 mx-auto">
+                        <p class="text-sm mt-1 leading-snug hover:text-amazonOrange">eos Shea Butter Body Lotion</p>
+                    </div>
+                    <div class="product-card p-3 text-center cursor-pointer transition-transform hover:scale-[1.03] duration-200">
+                        <img src="https://placehold.co/150x150/f8f8f8/10b981?text=DJI+Drone" alt="DJI Drone" class="w-full h-32 object-contain mb-3 mx-auto">
+                        <p class="text-sm mt-1 leading-snug hover:text-amazonOrange">DJI Mini Pro Drone with Controller</p>
+                    </div>
+                    <div class="product-card p-3 text-center cursor-pointer transition-transform hover:scale-[1.03] duration-200">
+                        <img src="https://placehold.co/150x150/f8f8f8/3b82f6?text=Stanley+Mug" alt="Stanley Thermos" class="w-full h-32 object-contain mb-3 mx-auto">
+                        <p class="text-sm mt-1 leading-snug hover:text-amazonOrange">Stanley Classic Vacuum Insulated Bottle</p>
+                    </div>
+                    <div class="product-card p-3 text-center cursor-pointer transition-transform hover:scale-[1.03] duration-200">
+                        <img src="https://placehold.co/150x150/f8f8f8/7c3aed?text=Coffee+Maker" alt="Keurig" class="w-full h-32 object-contain mb-3 mx-auto">
+                        <p class="text-sm mt-1 leading-snug hover:text-amazonOrange">Keurig K-Express Single Serve Coffee Maker</p>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-bold">Popular products in Apparel internationally</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 bg-white p-4 rounded-lg shadow-xl">
+                    <!-- Apparel Card 1: Jacket -->
+                    <div class="product-card p-3 text-center cursor-pointer transition-transform hover:scale-[1.03] duration-200">
+                        <img src="https://placehold.co/150x200/94a3b8/FFFFFF?text=Outdoor+Jacket" alt="Jacket" class="w-full h-48 object-contain mb-3 mx-auto">
+                        <p class="text-sm mt-1 leading-snug hover:text-amazonOrange">Men's Zip-Up Outdoor Jacket</p>
+                    </div>
+                    <!-- Apparel Card 2: Cap -->
+                    <div class="product-card p-3 text-center cursor-pointer transition-transform hover:scale-[1.03] duration-200">
+                        <img src="https://placehold.co/150x200/fef3c7/000000?text=Beige+Cap" alt="Tommy Hilfiger Cap" class="w-full h-48 object-contain mb-3 mx-auto">
+                        <p class="text-sm mt-1 leading-snug hover:text-amazonOrange">TOMMY HILFIGER Logo Cap Beige</p>
+                    </div>
+                    <!-- Apparel Card 3: Puffer Vest -->
+                    <div class="product-card p-3 text-center cursor-pointer transition-transform hover:scale-[1.03] duration-200">
+                        <img src="https://placehold.co/150x200/4b5563/FFFFFF?text=Puffer+Vest" alt="Puffer Vest" class="w-full h-48 object-contain mb-3 mx-auto">
+                        <p class="text-sm mt-1 leading-snug hover:text-amazonOrange">Men's Lightweight Puffer Vest</p>
+                    </div>
+                    <!-- Apparel Card 4: White Shirt -->
+                    <div class="product-card p-3 text-center cursor-pointer transition-transform hover:scale-[1.03] duration-200">
+                        <img src="https://placehold.co/150x200/FFFFFF/1f2937?text=White+Shirt" alt="White Shirt" class="w-full h-48 object-contain mb-3 mx-auto">
+                        <p class="text-sm mt-1 leading-snug hover:text-amazonOrange">Classic Men's White Oxford Shirt</p>
+                    </div>
+                    <!-- Apparel Card 5: Zip Sweater -->
+                    <div class="product-card p-3 text-center cursor-pointer transition-transform hover:scale-[1.03] duration-200">
+                        <img src="https://placehold.co/150x200/1f2937/FFFFFF?text=Zip+Sweater" alt="Zip Sweater" class="w-full h-48 object-contain mb-3 mx-auto">
+                        <p class="text-sm mt-1 leading-snug hover:text-amazonOrange">Men's Full-Zip Sweater Jacket</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!--
+    ======================================
+    6. FOOTER (MOCK)
+    ======================================
+    -->
+    <footer class="mt-8">
+        <!-- Back to Top -->
+        <div class="bg-amazonDark text-center p-3 text-white cursor-pointer hover:bg-gray-700 transition duration-150">
+            <a href="#top" class="text-sm">Back to top</a>
+        </div>
+
+        <!-- Links Section -->
+        <div class="bg-amazonBlue/90 p-10 text-white grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-gray-700">
+            <div>
+                <h4 class="font-bold mb-3">Get to Know Us</h4>
+                <ul class="text-sm space-y-2 text-gray-300">
+                    <li><a href="#" class="hover:underline">Careers</a></li>
+                    <li><a href="#" class="hover:underline">Blog</a></li>
+                    <li><a href="#" class="hover:underline">About Amazon</a></li>
+                    <li><a href="#" class="hover:underline">Investor Relations</a></li>
+                    <li><a href="#" class="hover:underline">Amazon Devices</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-3">Make Money with Us</h4>
+                <ul class="text-sm space-y-2 text-gray-300">
+                    <li><a href="#" class="hover:underline">Sell on Amazon</a></li>
+                    <li><a href="#" class="hover:underline">Sell apps on Amazon</a></li>
+                    <li><a href="#" class="hover:underline">Become an Affiliate</a></li>
+                    <li><a href="#" class="hover:underline">Advertise Your Products</a></li>
+                </ul>
+            </div>
+            <div class="hidden md:block">
+                <h4 class="font-bold mb-3">Amazon Payment Products</h4>
+                <ul class="text-sm space-y-2 text-gray-300">
+                    <li><a href="#" class="hover:underline">Amazon Rewards Card</a></li>
+                    <li><a href="#" class="hover:underline">Shop with Points</a></li>
+                    <li><a href="#" class="hover:underline">Reload Your Balance</a></li>
+                    <li><a href="#" class="hover:underline">Amazon Currency Converter</a></li>
+                </ul>
+            </div>
+            <div class="hidden md:block">
+                <h4 class="font-bold mb-3">Let Us Help You</h4>
+                <ul class="text-sm space-y-2 text-gray-300">
+                    <li><a href="#" class="hover:underline">COVID-19 and Amazon</a></li>
+                    <li><a href="#" class="hover:underline">Shipping Rates & Policies</a></li>
+                    <li><a href="#" class="hover:underline">Returns & Replacements</a></li>
+                    <li><a href="#" class="hover:underline">Help</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Bottom Bar -->
+        <div class="bg-amazonBlue py-6 text-center text-sm text-gray-400 border-t border-gray-700">
+            <p>© 1996-2025, Amazon.com, Inc. or its affiliates (Clone Mockup)</p>
+        </div>
+    </footer>
+
+</body>
+</html>
