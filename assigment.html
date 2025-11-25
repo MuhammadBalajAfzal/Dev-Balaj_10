@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Game Storm Studios</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <style>
+      /* Use a common font family */
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      /* Custom styles for the timeline */
+      .timeline-item {
+        position: relative;
+        padding-bottom: 2rem;
+        padding-left: 2.5rem; /* Space for line and dot */
+      }
+      .timeline-item:not(:last-child)::before {
+        content: "";
+        position: absolute;
+        left: 0.5rem;
+        top: 0.5rem;
+        bottom: -0.5rem;
+        width: 2px;
+        background-color: #e5e7eb; /* gray-200 */
+      }
+      .timeline-dot {
+        position: absolute;
+        left: 0;
+        top: 0.5rem;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background-color: #c53030; /* A shade of red */
+        border: 2px solid white;
+      }
+
+      /* Responsive timeline line for larger screens */
+      @media (min-width: 768px) {
+        .md-timeline-item {
+          position: relative;
+          padding-bottom: 0;
+          padding-left: 0;
+        }
+        .md-timeline-item:not(:last-child)::before {
+          content: "";
+          position: absolute;
+          left: 50%;
+          top: 1.5rem; /* Adjust based on circle size */
+          bottom: auto;
+          width: calc(100% - 4rem); /* Full width minus padding */
+          height: 3px;
+          background-color: #e5e7eb; /* gray-200 */
+          transform: translateX(-50%);
+        }
+        /* Remove line for the last item in a row */
+        .md\:grid-cols-3 .md-timeline-item:nth-child(3n)::before,
+        .md\:grid-cols-4 .md-timeline-item:nth-child(4n)::before {
+          display: none;
+        }
+        /* Re-add line for items starting a new row, except the very last item */
+        .md\:grid-cols-3
+          .md-timeline-item:nth-child(3n + 1):not(:last-child)::before,
+        .md\:grid-cols-4
+          .md-timeline-item:nth-child(4n + 1):not(:last-child)::before {
+          display: block;
+        }
+
+        /* Hide vertical line on md */
+        .timeline-item::before {
+          display: none;
+        }
+        /* Center dot on md */
+        .timeline-dot {
+          left: 50%;
+          top: 1rem; /* Adjust to center */
+          transform: translateX(-50%);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-800">
+    <!-- Header / Navbar -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <nav
+        class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center"
+      >
+        <!-- Logo -->
+        <div class="text-2xl font-bold text-red-700">
+          <i class="fas fa-gamepad mr-2"></i>
+          <!-- Placeholder logo -->
+          THE GAMESTORM STUDIOS
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="hidden md:flex items-center space-x-6">
+          <a href="#" class="text-gray-600 hover:text-red-700 font-medium"
+            >Home</a
+          >
+          <a href="#" class="text-gray-600 hover:text-red-700 font-medium"
+            >Games</a
+          >
+          <a href="#" class="text-gray-600 hover:text-red-700 font-medium"
+            >News</a
+          >
+          <a href="#" class="text-gray-600 hover:text-red-700 font-medium"
+            >Careers</a
+          >
+          <a href="#" class="text-red-700 font-bold">About</a>
+        </div>
+
+        <!-- Right Icons -->
+        <div class="flex items-center space-x-4">
+          <button class="text-gray-600 hover:text-red-700">
+            <i class="fas fa-search"></i>
+          </button>
+          <button class="text-gray-600 hover:text-red-700">
+            <i class="fas fa-flag"></i>
+            <!-- Placeholder for flag -->
+          </button>
+          <button class="md:hidden text-gray-600 hover:text-red-700">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <!-- Hero Section -->
+      <section
+        class="relative h-[60vh] min-h-[400px] bg-gray-800 text-white flex items-center justify-center text-center"
+      >
+        <!-- Background Image -->
+        <img
+          src="about.png"
+          alt="Futuristic city skyline with silhouettes"
+          class="absolute inset-0 w-full h-full object-cover opacity-40"
+        />
+
+        <!-- Content -->
+        <div class="relative z-10 p-4">
+          <h1 class="text-4xl md:text-6xl font-bold mb-4">
+            About Game Storm Studios
+          </h1>
+          <p class="text-lg md:text-xl max-w-3xl mx-auto">
+            Game Storm Studios is a leading game development and publishing
+            company shaping the future of interactive entertainment. With 12+
+            years of experience, 1,000+ games published, and 1 billion+
+            downloads, we deliver world-class experiences across mobile, PC, and
+            console platforms.
+          </p>
+        </div>
+      </section>
+
+      <!-- Our Mission -->
+      <section class="py-16 md:py-24 bg-white text-center">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 class="text-3xl md:text-4xl font-bold text-red-700 mb-6">
+            <i class="fas fa-bullseye mr-2"></i>
+            Our Mission
+          </h2>
+          <p class="text-lg md:text-xl text-gray-700 max-w-4xl mx-auto">
+            To create
+            <span class="font-bold text-gray-900"
+              >engaging, high-quality, and meaningful</span
+            >
+            gaming experiences that entertain and inspire players worldwide. Our
+            approach blends art, technology, and innovation to craft
+            unforgettable worlds.
+          </p>
+        </div>
+      </section>
+
+      <!-- What We Do -->
+      <section class="py-16 md:py-24 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+            What We Do
+          </h2>
+          <p
+            class="text-lg md:text-xl text-gray-700 text-center max-w-4xl mx-auto mb-12"
+          >
+            We offer
+            <span class="font-bold"
+              >end-to-end development, publishing, and technology
+              solutions</span
+            >
+            — blending creativity, innovation, and technical excellence to
+            deliver unforgettable experiences.
+          </p>
+
+          <!-- Services Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Service Card Template -->
+            <div
+              class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
+              <i class="fas fa-gamepad text-4xl text-red-700 mb-4"></i>
+              <h3 class="text-xl font-bold mb-2">Game Design & Development</h3>
+              <p class="text-gray-600">
+                Full-cycle production for iOS, Android, PC, and console using
+                industry-leading engines like Unity, Unreal, and Godot.
+              </p>
+            </div>
+            <div
+              class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
+              <i class="fas fa-mobile-alt text-4xl text-red-700 mb-4"></i>
+              <h3 class="text-xl font-bold mb-2">
+                Mobile Native App Development
+              </h3>
+              <p class="text-gray-600">
+                High-performance Android and iOS native applications built for
+                seamless performance and immersive UX.
+              </p>
+            </div>
+            <div
+              class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
+              <i class="fas fa-palette text-4xl text-red-700 mb-4"></i>
+              <h3 class="text-xl font-bold mb-2">Art & Animation</h3>
+              <p class="text-gray-600">
+                From stylized 2D visuals to hyper-realistic 3D environments, our
+                artists and animators bring every idea to life.
+              </p>
+            </div>
+            <div
+              class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
+              <i class="fas fa-database text-4xl text-red-700 mb-4"></i>
+              <h3 class="text-xl font-bold mb-2">Backend & LiveOps</h3>
+              <p class="text-gray-600">
+                Scalable, cloud-based infrastructure enabling multiplayer
+                systems, real-time analytics, and event-driven updates.
+              </p>
+            </div>
+            <div
+              class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
+              <i class="fas fa-chart-line text-4xl text-red-700 mb-4"></i>
+              <h3 class="text-xl font-bold mb-2">
+                Monetization & BI Solutions
+              </h3>
+              <p class="text-gray-600">
+                Turning player, ad, and market data into actionable insights
+                through advanced business intelligence dashboards.
+              </p>
+            </div>
+            <div
+              class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
+              <i class="fas fa-bullhorn text-4xl text-red-700 mb-4"></i>
+              <h3 class="text-xl font-bold mb-2">
+                Marketing & User Acquisition (UA)
+              </h3>
+              <p class="text-gray-600">
+                Performance-led growth strategies using creative optimization,
+                attribution tracking, and data-driven campaigns.
+              </p>
+            </div>
+            <div
+              class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
+              <i class="fas fa-brain text-4xl text-red-700 mb-4"></i>
+              <h3 class="text-xl font-bold mb-2">AI & Machine Learning</h3>
+              <p class="text-gray-600">
+                Integrating AI systems for smarter gameplay, adaptive learning,
+                predictive analytics, and content personalization.
+              </p>
+            </div>
+            <div
+              class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
+              <i class="fas fa-link text-4xl text-red-700 mb-4"></i>
+              <h3 class="text-xl font-bold mb-2">
+                Blockchain & NFT Integration
+              </h3>
+              <p class="text-gray-600">
+                Creating Web3 ecosystems with NFT assets, player-owned
+                economies, and secure blockchain-based transactions.
+              </p>
+            </div>
+            <div
+              class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
+              <i class="fas fa-vr-cardboard text-4xl text-red-700 mb-4"></i>
+              <h3 class="text-xl font-bold mb-2">AR & VR Development</h3>
+              <p class="text-gray-600">
+                Building immersive AR and VR experiences using ARCore, ARKit,
+                and Oculus SDK for gaming and simulation.
+              </p>
+            </div>
+            <div
+              class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
+              <i class="fas fa-cloud text-4xl text-red-700 mb-4"></i>
+              <h3 class="text-xl font-bold mb-2">
+                Cloud Infrastructure & DevOps
+              </h3>
+              <p class="text-gray-600">
+                Using AWS, Google Cloud, Azure, Docker, and CI/CD pipelines for
+                reliable, scalable deployment and 24/7 live operations.
+              </p>
+            </div>
+            <div
+              class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
+              <i class="fas fa-globe text-4xl text-red-700 mb-4"></i>
+              <h3 class="text-xl font-bold mb-2">Global Publishing</h3>
+              <p class="text-gray-600">
+                Delivering games to audiences in 150+ countries with 1B+
+                downloads.
+              </p>
+            </div>
+            <div
+              class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
+              <i class="fas fa-users text-4xl text-red-700 mb-4"></i>
+              <h3 class="text-xl font-bold mb-2">Collaborative Team Culture</h3>
+              <p class="text-gray-600">
+                Empowering cross-functional teams of designers, developers, and
+                data scientists to innovate faster and smarter.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Our Journey -->
+      <section class="py-16 md:py-24 bg-white overflow-hidden">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
+            Our Journey
+          </h2>
+
+          <!-- Simplified Timeline -->
+          <!-- This is a simplified, responsive grid version of the complex timeline graphic -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
+            <!-- Timeline Item -->
+            <div class="timeline-item md-timeline-item">
+              <div class="timeline-dot"></div>
+              <h3 class="text-2xl font-bold text-gray-500 mb-2">2014</h3>
+              <h4 class="text-xl font-bold text-gray-900 mb-1">
+                FIRST GLOBAL SUCCESS,
+              </h4>
+              <p class="text-gray-600">
+                Early mobile titles reach 10M+ downloads - making our first
+                global milestone.
+              </p>
+            </div>
+            <!-- Timeline Item -->
+            <div class="timeline-item md-timeline-item">
+              <div class="timeline-dot"></div>
+              <h3 class="text-2xl font-bold text-gray-500 mb-2">2016</h3>
+              <h4 class="text-xl font-bold text-gray-900 mb-1">
+                EXPANDING HORIZONS,
+              </h4>
+              <p class="text-gray-600">
+                Early mobile titles reach 10M+ downloads, making our first
+                milestone in global publishing. <br /><b>Team:</b> 20+
+                specialists across design and development.
+              </p>
+            </div>
+            <!-- Timeline Item -->
+            <div class="timeline-item md-timeline-item">
+              <div class="timeline-dot"></div>
+              <h3 class="text-2xl font-bold text-gray-500 mb-2">2018</h3>
+              <h4 class="text-xl font-bold text-gray-900 mb-1">
+                GLOBAL RECOGNITION,
+              </h4>
+              <p class="text-gray-600">
+                Surpassed 100M+ consumers and won the Google Game Award for
+                creative and technical excellence. <br /><b>Team:</b> 30+
+                professionals driving multi-gate production.
+              </p>
+            </div>
+            <!-- Timeline Item -->
+            <div class="timeline-item md-timeline-item">
+              <div class="timeline-dot"></div>
+              <h3 class="text-2xl font-bold text-gray-500 mb-2">2019</h3>
+              <h4 class="text-xl font-bold text-gray-900 mb-1">
+                NATIONAL HONOR,
+              </h4>
+              <p class="text-gray-600">
+                Received the Presidential Award for Innovation in Game
+                Development. <br /><b>Team:</b> 45+ talented innovators.
+              </p>
+            </div>
+            <!-- Timeline Item -->
+            <div class="timeline-item md-timeline-item">
+              <div class="timeline-dot"></div>
+              <h3 class="text-2xl font-bold text-gray-500 mb-2">2020</h3>
+              <h4 class="text-xl font-bold text-gray-900 mb-1">
+                DATA & INTELLIGENCE ERA,
+              </h4>
+              <p class="text-gray-600">
+                Launched advanced BI pipelines to analyze player data and
+                optimize engagement and LTV. <br /><b>Team:</b> 50+ experts
+                including data analysts and LiveOps engineers.
+              </p>
+            </div>
+            <!-- Timeline Item -->
+            <div class="timeline-item md-timeline-item">
+              <div class="timeline-dot"></div>
+              <h3 class="text-2xl font-bold text-gray-500 mb-2">2022</h3>
+              <h4 class="text-xl font-bold text-gray-900 mb-1">
+                THE 1 BILLION MILESTONE,
+              </h4>
+              <p class="text-gray-600">
+                Portfolio surpasses 1B+ downloads with personalized gameplay and
+                automated monetization. <br /><b>Team:</b> 65+ developers,
+                artists, and strategists worldwide.
+              </p>
+            </div>
+            <!-- Timeline Item -->
+            <div class="timeline-item md-timeline-item">
+              <div class="timeline-dot"></div>
+              <h3 class="text-2xl font-bold text-red-700 mb-2">2023</h3>
+              <h4 class="text-xl font-bold text-gray-900 mb-1">
+                WEB3 & GLOBAL IMPACT,
+              </h4>
+              <p class="text-gray-600">
+                Expanded into AI/VR and blockchain gaming. Honored with the
+                USAID Award for Innovation. <br /><b>Team:</b> 85+ developers,
+                artists, and strategists worldwide.
+              </p>
+            </div>
+            <!-- Timeline Item -->
+            <div class="timeline-item md-timeline-item">
+              <div class="timeline-dot"></div>
+              <h3 class="text-2xl font-bold text-red-700 mb-2">2025</h3>
+              <h4 class="text-xl font-bold text-gray-900 mb-1">
+                THE AGE OF AI,
+              </h4>
+              <p class="text-gray-600">
+                Integrating AI for procedural worlds, adaptive learning, and
+                predictive analytics. <br /><b>Team:</b> 100+ specialists across
+                8 departments and 3 continents.
+              </p>
+            </div>
+            <!-- Timeline Item -->
+            <div class="timeline-item md-timeline-item">
+              <div class="timeline-dot"></div>
+              <h3 class="text-2xl font-bold text-green-600 mb-2">2026</h3>
+              <h4 class="text-xl font-bold text-gray-900 mb-1">
+                NEXT GENERATION OF PLAY [FUTURE],
+              </h4>
+              <p class="text-gray-600">
+                Building immersive, interconnected ecosystems uniting AI, Web3,
+                and cloud platforms. <br /><b>Projected Team:</b> 200+ global
+                innovators shaping the future of play.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Global Presence -->
+      <section class="py-16 md:py-24 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 class="text-3xl md:text-4xl font-bold text-red-700 mb-6">
+            Global Presence & Partnerships
+          </h2>
+          <p class="text-lg md:text-xl text-gray-700 max-w-4xl mx-auto">
+            Our talented teams collaborate with leading publishers, brands, and
+            platforms worldwide. From indie studios to global enterprises, we
+            help our partners build, launch, and scale games that reach
+            audiences in over
+            <span class="font-bold text-red-700">150+ countries.</span>
+          </p>
+        </div>
+      </section>
+
+      <!-- Why Partner With Us -->
+      <section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            Why Partner With Us
+          </h2>
+          <p class="text-lg text-gray-700 max-w-4xl mx-auto mb-10">
+            From indie studios to global publishers, we empower our partners
+            with innovation, creativity, and proven results. With over 12 years
+            of experience, 1,000+ successful launches, and 1B+ downloads, we
+            bring the expertise and technology to create games and apps that
+            truly stand out. Partner with Game Storm Studios — where ideas
+            become experiences, and experiences become success stories.
+          </p>
+          <a
+            href="#"
+            class="inline-block bg-red-700 text-white font-bold text-lg py-3 px-8 rounded-lg shadow-lg hover:bg-red-800 transition-colors duration-300"
+          >
+            Get In Touch
+          </a>
+        </div>
+      </section>
+
+      <!-- Stats -->
+      <section class="py-16 md:py-24 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <!-- Stats Grid -->
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center mb-12"
+          >
+            <div>
+              <span class="block text-5xl font-bold text-red-700">12+</span>
+              <span class="block text-lg text-gray-600"
+                >Years of Proven Experience</span
+              >
+            </div>
+            <div>
+              <span class="block text-5xl font-bold text-red-700">1,000+</span>
+              <span class="block text-lg text-gray-600">Games Published</span>
+            </div>
+            <div>
+              <span class="block text-5xl font-bold text-red-700">1B+</span>
+              <span class="block text-lg text-gray-600">Downloads</span>
+            </div>
+            <div>
+              <span class="block text-5xl font-bold text-red-700">50+</span>
+              <span class="block text-lg text-gray-600">Global Partners</span>
+            </div>
+          </div>
+
+          <p class="text-center text-lg text-gray-600 mb-2">
+            24/7 LiveOps & Technical Support
+          </p>
+          <p class="text-center text-2xl font-bold text-red-700 mb-12">
+            We don't just build games — we build success stories.
+          </p>
+
+          <!-- Join the Storm -->
+          <div class="text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-red-700 mb-6">
+              Join the Storm
+            </h2>
+            <p class="text-lg text-gray-700 max-w-2xl mx-auto mb-10">
+              Let's create the next big hit — together. Partner with us to shape
+              the next era of play.
+            </p>
+            <a
+              href="#"
+              class="inline-block bg-red-700 text-white font-bold text-lg py-3 px-8 rounded-full shadow-lg hover:bg-red-800 transition-colors duration-300"
+            >
+              Partner with Us <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white">
+      <!-- Top Footer -->
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Explore -->
+          <div>
+            <h5 class="text-xl font-bold mb-4">Explore</h5>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-gray-600 hover:text-red-700">Games</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-600 hover:text-red-700"
+                  >Community</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-600 hover:text-red-700">Careers</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-600 hover:text-red-700">Support</a>
+              </li>
+            </ul>
+          </div>
+          <!-- Legal -->
+          <div>
+            <h5 class="text-xl font-bold mb-4">Legal</h5>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-gray-600 hover:text-red-700"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-600 hover:text-red-700"
+                  >Terms of Service</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-600 hover:text-red-700"
+                  >Cookie Policy</a
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- Follow Us -->
+          <div>
+            <h5 class="text-xl font-bold mb-4">Follow Us</h5>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-600 hover:text-blue-600 text-2xl"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a href="#" class="text-gray-600 hover:text-black text-2xl"
+                ><i class="fab fa-x-twitter"></i
+              ></a>
+              <a href="#" class="text-gray-600 hover:text-pink-500 text-2xl"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="text-gray-600 hover:text-red-600 text-2xl"
+                ><i class="fab fa-youtube"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Footer -->
+      <div class="bg-red-800 text-gray-200 py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h5 class="text-xl font-bold text-white mb-6">OFFICES</h5>
+          <!-- Offices Grid -->
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8"
+          >
+            <div>
+              <h6 class="font-bold text-white mb-1">
+                Lahore Office <span class="opacity-70">🇵🇰</span>
+              </h6>
+              <p class="text-sm">
+                15th Floor, Arfa Software Technology Park, 346-B, Ferozepur
+                Road, Lahore
+              </p>
+            </div>
+            <div>
+              <h6 class="font-bold text-white mb-1">
+                Karachi Office <span class="opacity-70">🇵🇰</span>
+              </h6>
+              <p class="text-sm">
+                Office # 608, Parsa Tower, Shahra-e-Faisal Karachi, Pakistan.
+              </p>
+            </div>
+            <div>
+              <h6 class="font-bold text-white mb-1">
+                USA Office <span class="opacity-70">🇺🇸</span>
+              </h6>
+              <p class="text-sm">520 Smoke Tree Dr Murphy 75094, Texas, USA</p>
+            </div>
+            <div>
+              <h6 class="font-bold text-white mb-1">
+                Dubai Office <span class="opacity-70">🇦🇪</span>
+              </h6>
+              <p class="text-sm">
+                308, Tiffany Tower, Cluster W, JLT, Dubai, UAE.
+              </p>
+            </div>
+          </div>
+          <!-- Contact Info -->
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-red-700 pt-8"
+          >
+            <div class="flex items-center">
+              <i class="fas fa-envelope text-2xl text-white mr-4"></i>
+              <div>
+                <h6 class="font-bold text-white">Email</h6>
+                <a
+                  href="mailto:info@thegamestormstudios.com"
+                  class="text-sm hover:underline"
+                  >info@thegamestormstudios.com</a
+                >
+              </div>
+            </div>
+            <div class="flex items-center">
+              <i class="fas fa-phone text-2xl text-white mr-4"></i>
+              <div>
+                <h6 class="font-bold text-white">Phone</h6>
+                <a href="tel:+14099953386" class="text-sm hover:underline"
+                  >+1 409 9953 386</a
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Copyright -->
+          <div
+            class="text-center text-gray-300 border-t border-red-700 pt-8 mt-8 text-sm"
+          >
+            © 2025 Game Storm Studios. All Rights Reserved.
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Floating WhatsApp Icon -->
+    <a
+      href="#"
+      class="fixed bottom-6 right-6 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition-colors z-40"
+    >
+      <i class="fab fa-whatsapp text-4xl"></i>
+    </a>
+  </body>
+</html>
