@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body { font-family: sans-serif; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; min-height: 100vh; background-color: white; margin: 0; padding: 10px; box-sizing: border-box; }
+        #chat-window { flex-grow: 1; padding: 10px; overflow-y: auto; width: 100%; max-width: 600px; margin-bottom: 10px; }
+        .message-user { text-align: right; margin-bottom: 5px; }
+        .message-bot { text-align: left; margin-bottom: 5px; }
+        .bubble-user, .bubble-bot { padding: 0; display: inline; }
+        #chat-form { display: flex; width: 100%; max-width: 600px; }
+        #user-input { flex-grow: 1; padding: 5px; border: 1px solid black; margin-right: 5px; }
+        #send-button { padding: 5px 10px; background-color: white; color: black; border: 1px solid black; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div id="chat-window"></div>
+    <form id="chat-form">
+        <input type="text" id="user-input" placeholder="Ask about cars..." required>
+        <button type="submit" id="send-button">Send</button>
+    </form>
+    <script>
+        const cw = document.getElementById('chat-window'), cf = document.getElementById('chat-form'),
+              ui = document.getElementById('user-input'), sb = document.getElementById('send-button');
+
+        const API_KEY = "", MODEL = 'gemini-2.5-flash-preview-09-2025';
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${API_KEY}`;
+        const SYS_PROMPT = "You are the simplest, friendliest car expert. You only answer questions about cars. Keep your responses extremely short, polite, and under one sentence.";
+        let history = [];
+
+        const toApiFormat = () => history.map(m => ({ role: m.sender === 'user' ? 'user' : 'model', parts: [{ text: m.text }] }));
+        
+        function addMessage(text, sender) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = sender === 'user' ? 'message-user' : 'message-bot';
+            const txtDiv = document.createElement('div');
+            txtDiv.className = sender === 'user' ? 'bubble-user' : 'bubble-bot';
+            txtDiv.textContent = text;
+            msgDiv.appendChild(txtDiv);
+            cw.appendChild(msgDiv);
+            cw.scrollTop = cw.scrollHeight;
+        }
+
+        async function fetchResponse(msg) {
+            history.push({ sender: 'user', text: msg });
+            ui.placeholder = "Expert is typing..."; sb.disabled = ui.disabled = true;
+
+            const payload = { contents: toApiFormat(), systemInstruction: { parts: [{ text: SYS_PROMPT }] } };
+            let text = "Sorry, error getting response.";
+            let success = false;
+            
+            for (let i = 0; i < 3; i++) {
+                try {
+                    const res = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                    const result = await res.json();
+                    const t = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                    if (!res.ok || !t) {
+                        console.error("API Error or No Text:", res.status, result); // Log full response for debugging
+                        throw new Error(`Model/API Error`);
+                    }
+                    text = t; success = true; break;
+                } catch (e) {
+                    console.error("Chat Error:", e);
+                    await new Promise(r => setTimeout(r, Math.pow(2, i) * 1000));
+                }
+            }
+
+            if (!success) {
+                text = "Sorry, the car expert couldn't connect right now. Check the browser console (F12) for details.";
+            }
+
+            history.push({ sender: 'bot', text: text });
+            addMessage(text, 'bot');
+            
+            ui.placeholder = "Ask about cars..."; sb.disabled = ui.disabled = false; ui.focus();
+        }
+
+        cf.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const msg = ui.value.trim();
+            if (!msg) return;
+            addMessage(msg, 'user');
+            ui.value = '';
+            fetchResponse(msg);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            addMessage("Ask me a quick question about cars.", 'bot');
+            ui.focus();
+        });
+    </script>
+</body>
+</html>
