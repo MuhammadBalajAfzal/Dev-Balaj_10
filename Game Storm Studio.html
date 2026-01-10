@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Game Storm Studios</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+        /* Custom styles to match the original design colors */
+        .header-red {
+            background-color: #d81e26; /* Deep Red from photo1.jpg */
+        }
+        .text-gamestorm-red {
+            color: #d81e26;
+        }
+        .bg-gamestorm-red {
+            background-color: #d81e26;
+        }
+        .bg-library-dark {
+            background-color: #171c26; /* Dark blue/black from photo3.jpg */
+        }
+        .hero-section {
+            /* Using the latest photo1.jpg upload for the hero background */
+            background-image: url('photo1.jpg');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            min-height: 700px;
+            position: relative;
+        }
+        /* Custom card styling for services/tech stack */
+        .feature-card {
+            transition: transform 0.2s;
+            min-height: 250px;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        /* Style for the Contact form placeholder character */
+        .contact-character {
+            position: absolute;
+            right: 0;
+            bottom: -50px;
+            width: 300px; /* Adjust size for mobile */
+            height: auto;
+            z-index: 10;
+        }
+        @media (min-width: 1024px) {
+            .contact-character {
+                width: 400px;
+                bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-700">
+
+    <!-- Section 1: Hero & Header (photo1.jpg) -->
+    <div class="hero-section">
+        <!-- Top Navigation Bar -->
+        <header class="header-red text-white py-3 shadow-md">
+            <div class="max-w-7xl mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8">
+                <!-- Logo/Title -->
+                <div class="flex items-center space-x-2">
+                    <!-- Updated Logo Icon for a professional look -->
+                    <i class="fas fa-drafting-compass text-2xl"></i>
+                    <span class="text-xl font-bold tracking-wider">THE GAME STORM STUDIOS</span>
+                </div>
+
+                <!-- Navigation Links - UPDATED FOR FLAGS AND SEARCH ALIGNMENT -->
+                <nav class="hidden lg:flex items-center space-x-6 font-medium text-sm">
+                    <a href="#" class="hover:text-gray-300 transition duration-150">Home</a>
+                    <a href="#services" class="hover:text-gray-300 transition duration-150">Services</a>
+                    <a href="#library" class="hover:text-gray-300 transition duration-150">Games</a>
+                    <a href="#news" class="hover:text-gray-300 transition duration-150">News</a>
+                    <a href="#" class="hover:text-gray-300 transition duration-150">Careers</a>
+                    <a href="#contact-us" class="hover:text-gray-300 transition duration-150">Contact</a>
+                    
+                    <!-- Search and Flags Group -->
+                    <div class="flex items-center space-x-3 pl-6 border-l border-white/30">
+                        <i class="fas fa-search opacity-75"></i>
+                        <img src="https://flagcdn.com/w20/us.png" alt="USA Flag" class="h-4 w-auto rounded">
+                        <img src="https://flagcdn.com/w20/sa.png" alt="Saudi Arabia Flag" class="h-4 w-auto rounded">
+                    </div>
+                </nav>
+
+                <!-- Mobile Menu Icon -->
+                <button class="lg:hidden text-2xl hover:text-gray-300">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Hero Content Overlay -->
+        <div class="max-w-7xl mx-auto pt-40 pb-20 px-4 sm:px-6 lg:px-8 text-white relative z-0">
+            <div class="max-w-2xl">
+                <h2 class="text-xl font-semibold mb-2" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">The Game Storm Studios Incorporated</h2>
+                <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-4" style="text-shadow: 1px 1px 5px rgba(0,0,0,0.8);">
+                    ONE GAME AT A TIME<br>
+                    GAME DEVELOPMENT STUDIO AND PUBLISHERS.
+                </h1>
+                <p class="text-lg mt-6 mb-8 max-w-xl" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.6);">
+                    The Game Storm Studios Incorporated is a leading game development company dedicated to delivering exceptional
+                    experiences to both clients and players. We specialize in creating high-quality mobile games and applications, offering
+                    customized development services for iOS and Android platforms.
+                </p>
+                <a href="#contact-form" class="inline-block bg-gamestorm-red text-white text-lg font-bold py-3 px-8 rounded-lg hover:bg-red-700 transition duration-300 shadow-xl transform hover:scale-105">
+                    Get In Touch
+                </a>
+            </div>
+        </div>
+
+        <!-- WhatsApp Floating Action Button (from all images) -->
+        <a href="#" class="fixed bottom-6 right-6 z-50 bg-green-500 rounded-full p-3 shadow-lg hover:scale-110 transition duration-300">
+            <i class="fab fa-whatsapp text-3xl text-white"></i>
+        </a>
+    </div>
+
+    <!-- Section 2: Stats/Trust (photo2.jpg) -->
+    <div class="bg-white py-12 -mt-20 relative z-10 shadow-xl rounded-xl max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 justify-around text-center divide-x divide-gray-200">
+            <div class="p-4">
+                <p class="text-4xl lg:text-5xl font-extrabold text-gamestorm-red">12+</p>
+                <p class="text-xs uppercase tracking-wider mt-1 text-gray-500">Years of Innovation</p>
+            </div>
+            <div class="p-4">
+                <p class="text-4xl lg:text-5xl font-extrabold text-gamestorm-red">5000+</p>
+                <p class="text-xs uppercase tracking-wider mt-1 text-gray-500">Creative Ideas</p>
+            </div>
+            <div class="p-4">
+                <p class="text-4xl lg:text-5xl font-extrabold text-gamestorm-red">1000+</p>
+                <p class="text-xs uppercase tracking-wider mt-1 text-gray-500">Games Brought to Life</p>
+            </div>
+            <div class="p-4">
+                <p class="text-4xl lg:text-5xl font-extrabold text-gamestorm-red">1B+</p>
+                <p class="text-xs uppercase tracking-wider mt-1 text-gray-500">Downloads Globally</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Section 3: Studio Services & Capabilities (photo4.png, photo5.png, photo6.png) -->
+    <div id="services" class="max-w-7xl mx-auto py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row justify-between items-center lg:space-x-12">
+            <!-- Left Text Block -->
+            <div class="lg:w-1/2 mb-12 lg:mb-0">
+                <h2 class="text-4xl font-extrabold text-gray-900 mb-6">
+                    Studio Services & Capabilities
+                </h2>
+                <p class="text-lg text-gray-600 max-w-xl">
+                    At Game Storm Studios, we create world-class digital experiences by combining creativity, technology, and data-driven insights. We deliver solutions that inspire players and empower clients across platforms globally.
+                </p>
+            </div>
+
+            <!-- Right Mascot/Image Placeholder (photo4.png) -->
+            <div class="lg:w-1/2 flex justify-center lg:justify-end">
+                <!-- Using a placeholder for the complex mascot image -->
+                <img src="https://placehold.co/300x300/f59e0b/ffffff?text=Golden+Mascot+Placeholder" alt="Golden Mascot - Visual Mockup" class="max-w-xs md:max-w-sm h-auto rounded-xl shadow-2xl">
+            </div>
+        </div>
+
+        <!-- Services Grid (photo5.png & photo6.png) -->
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Game Design & Development -->
+            <div class="feature-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-purple-600">
+                <i class="fas fa-gamepad text-4xl text-purple-600 mb-4"></i>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Game Design & Development</h3>
+                <p class="text-sm text-gray-500">From concept to launch, we craft immersive 2D/3D experiences using Unity and Unreal for mobile, PC, and console.</p>
+            </div>
+
+            <!-- Native iOS & Android App Development -->
+            <div class="feature-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-pink-600">
+                <i class="fas fa-mobile-alt text-4xl text-pink-600 mb-4"></i>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Native iOS & Android App Development</h3>
+                <p class="text-sm text-gray-500">High-performance native apps built with Swift, Kotlin, and SDKs for seamless user experiences.</p>
+            </div>
+
+            <!-- Art & Animation -->
+            <div class="feature-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-green-600">
+                <i class="fas fa-palette text-4xl text-green-600 mb-4"></i>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Art & Animation</h3>
+                <p class="text-sm text-gray-500">2D/3D characters, environments, VFX, and cinematic-quality animation that bring worlds to life.</p>
+            </div>
+
+            <!-- UA & Monetization -->
+            <div class="feature-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-orange-600">
+                <i class="fas fa-chart-line text-4xl text-orange-600 mb-4"></i>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">UA & Monetization</h3>
+                <p class="text-sm text-gray-500">Grow your audience and revenue with performance-driven user acquisition and monetization strategies.</p>
+            </div>
+
+            <!-- Analytics & BI Solutions -->
+            <div class="feature-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-blue-600">
+                <i class="fas fa-database text-4xl text-blue-600 mb-4"></i>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Analytics & BI Solutions</h3>
+                <p class="text-sm text-gray-500">Comprehensive dashboards, KPI tracking, and predictive insights to drive smarter decisions.</p>
+            </div>
+
+            <!-- AI & Machine Learning -->
+            <div class="feature-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+                <i class="fas fa-robot text-4xl text-red-600 mb-4"></i>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">AI & Machine Learning</h3>
+                <p class="text-sm text-gray-500">Procedural content generation, adaptive gameplay, and intelligent player personalization.</p>
+            </div>
+
+            <!-- Blockchain & NFT Integration (from photo6.png) -->
+            <div class="feature-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-purple-800">
+                <i class="fas fa-cube text-4xl text-purple-800 mb-4"></i>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Blockchain & NFT Integration</h3>
+                <p class="text-sm text-gray-500">Secure, scalable Web3 integration for NFT assets, in-game economies, and player-owned ecosystems.</p>
+            </div>
+
+            <!-- Cloud Infrastructure & DevOps (from photo6.png) -->
+            <div class="feature-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-cyan-600">
+                <i class="fas fa-cloud text-4xl text-cyan-600 mb-4"></i>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Cloud Infrastructure & DevOps</h3>
+                <p class="text-sm text-gray-500">CI/CD, testing, and deployment pipelines for reliable and scalable live environments.</p>
+            </div>
+
+            <!-- AR & VR Development (from photo6.png) -->
+            <div class="feature-card bg-white p-6 rounded-xl shadow-lg border-t-4 border-yellow-600">
+                <i class="fas fa-rocket text-4xl text-yellow-600 mb-4"></i>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">AR & VR Development</h3>
+                <p class="text-sm text-gray-500">Immersive and interactive AR/VR experiences for gaming, simulation, and training.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Section 4: Tech Stack (photo7.png, photo8.png, photo9.png) -->
+    <div class="bg-gray-50 max-w-7xl mx-auto py-16 sm:py-24 px-4 sm:px-6 lg:px-8 rounded-2xl shadow-inner">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-4">
+                Our Tech Stack
+            </h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                We build high-performance, scalable, and future-ready games and apps using proven technologies and cutting-edge innovations.
+            </p>
+        </div>
+
+        <!-- Tech Stack Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Unity (photo7.png) -->
+            <div class="text-center p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                <i class="fas fa-cube text-4xl text-gray-700 mb-2"></i>
+                <h3 class="text-lg font-bold text-gray-900">Unity</h3>
+                <p class="text-xs text-gray-500">Cross-platform 2D & 3D development for mobile, PC, and console.</p>
+            </div>
+            <!-- Unreal Engine (photo7.png) -->
+            <div class="text-center p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                <i class="fas fa-star text-4xl text-green-500 mb-2"></i>
+                <h3 class="text-lg font-bold text-gray-900">Unreal Engine</h3>
+                <p class="text-xs text-gray-500">Next-gen rendering, physics, and cinematic visuals for immersive gameplay experiences.</p>
+            </div>
+            <!-- Godot (photo7.png) -->
+            <div class="text-center p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                <i class="fas fa-cogs text-4xl text-blue-700 mb-2"></i>
+                <h3 class="text-lg font-bold text-gray-900">Godot</h3>
+                <p class="text-xs text-gray-500">Lightweight, open-source engine ideal for rapid prototyping, custom workflows, and indie projects.</p>
+            </div>
+            <!-- Mobile Native Apps (photo8.png - using icons to represent platforms) -->
+            <div class="text-center p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                <i class="fab fa-apple text-4xl text-gray-900 mb-2"></i>
+                <i class="fab fa-android text-4xl text-green-600 mb-2"></i>
+                <h3 class="text-lg font-bold text-gray-900">Mobile Native Apps</h3>
+                <p class="text-xs text-gray-500">Custom-built Android (Kotlin, Java) and iOS (Swift, Objective-C) apps optimized for performance and security.</p>
+            </div>
+            <!-- PC (photo8.png) -->
+            <div class="text-center p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                <i class="fab fa-windows text-4xl text-blue-500 mb-2"></i>
+                <h3 class="text-lg font-bold text-gray-900">PC</h3>
+                <p class="text-xs text-gray-500">Optimized builds for Windows, macOS, and Steam.</p>
+            </div>
+            <!-- Console (photo8.png) -->
+            <div class="text-center p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                <i class="fab fa-xbox text-4xl text-green-600 mb-2"></i>
+                <h3 class="text-lg font-bold text-gray-900">Console</h3>
+                <p class="text-xs text-gray-500">Full integration for PlayStation, Xbox, and Nintendo Switch titles.</p>
+            </div>
+             <!-- Backend & LiveOps (photo9.png) -->
+            <div class="text-center p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                <i class="fas fa-fire text-4xl text-orange-600 mb-2"></i>
+                <h3 class="text-lg font-bold text-gray-900">Backend & LiveOps</h3>
+                <p class="text-xs text-gray-500">Firebase, PlayFab, Photon, AWS GameLift, Node.js — for multiplayer, cloud saves, and live events.</p>
+            </div>
+            <!-- Analytics, Monetization & BI (photo9.png) -->
+            <div class="text-center p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                <i class="fas fa-chart-area text-4xl text-red-400 mb-2"></i>
+                <h3 class="text-lg font-bold text-gray-900">Analytics, Monetization & BI</h3>
+                <p class="text-xs text-gray-500">AppLovin MAX, AdMob, Unity Ads, MMPs, predictive BI dashboards, and KPI analytics.</p>
+            </div>
+             <!-- AI & Machine Learning (photo9.png) -->
+            <div class="text-center p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                <i class="fas fa-brain text-4xl text-gray-900 mb-2"></i>
+                <h3 class="text-lg font-bold text-gray-900">AI & Machine Learning</h3>
+                <p class="text-xs text-gray-500">OpenAI APIs, TensorFlow, Unity ML-Agents, ChatGPT — for adaptive gameplay and smart systems.</p>
+            </div>
+             <!-- Blockchain & NFT Integration (photo9.png) -->
+            <div class="text-center p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                <i class="fas fa-link text-4xl text-purple-600 mb-2"></i>
+                <h3 class="text-lg font-bold text-gray-900">Blockchain & NFT Integration</h3>
+                <p class="text-xs text-gray-500">Solana, Ethereum, Polygon, Binance Smart Chain — powering Web3 game economies.</p>
+            </div>
+             <!-- Cloud Infrastructure & DevOps (photo9.png) -->
+            <div class="text-center p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                <i class="fab fa-aws text-4xl text-orange-400 mb-2"></i>
+                <h3 class="text-lg font-bold text-gray-900">Cloud Infrastructure & DevOps</h3>
+                <p class="text-xs text-gray-500">AWS, Google Cloud, Azure, Docker, Jenkins, GitHub Actions Continuous integration, testing, for reliable live environments.</p>
+            </div>
+            <!-- Marketing & User Acquisition (photo8.png) -->
+            <div class="text-center p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300">
+                <i class="fas fa-bullhorn text-4xl text-green-700 mb-2"></i>
+                <h3 class="text-lg font-bold text-gray-900">Marketing & User Acquisition</h3>
+                <p class="text-xs text-gray-500">Google Ads, Meta Ads, Mintegral, TikTok, AppsFlyer, Adjust, Comprehensive UA and marketing solutions</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Section 5: Game Library (photo3.jpg) -->
+    <div id="library" class="bg-library-dark py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-extrabold text-white mb-12">
+                Our Library
+            </h2>
+
+            <!-- Game Icons Grid (Replicating the dense grid look) -->
+            <div class="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-3">
+                <!-- Placeholder Game Icons for illustration (total 24 games shown in photo3.jpg) -->
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G1" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G2" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G3" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G4" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G5" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G6" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G7" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G8" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G9" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G10" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G11" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G12" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G13" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G14" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G15" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G16" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G17" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G18" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G19" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G20" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G21" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G22" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G23" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+                <img src="https://placehold.co/60x60/f0f0f0/333333?text=G24" alt="Game Icon" class="w-full h-auto rounded-xl transition duration-200 hover:scale-110">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Section 6: Client Testimonials (photo12.png) -->
+    <div class="max-w-7xl mx-auto py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-extrabold text-gamestorm-red mb-2">
+                Client Testimonials
+            </h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                Our clients span continents, genres, and platforms — but they all share one thing in common: a passion for quality and innovation. Discover what they say about partnering with GSS.
+            </p>
+        </div>
+
+        <!-- Testimonial Card (Mockup of the single card shown) -->
+        <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-2xl border-t-8 border-gamestorm-red">
+            <div class="flex items-start space-x-6">
+                <!-- Client Icon/Logo (Using a placeholder for the Green Camel image) -->
+                <img src="https://placehold.co/100x100/10b981/ffffff?text=GREEN+CAMEL" alt="Green Camel Logo" class="h-24 w-24 rounded-full object-cover border-4 border-white shadow-md">
+                <div class="flex-1">
+                    <h3 class="text-xl font-bold text-gray-900">GreenCamel</h3>
+                    <p class="text-sm text-gray-500 mb-4">Priya Nair, Head of Publishing</p>
+                    <p class="italic text-gray-700">"From UA strategy to BI dashboards, Game Storm Studios provided end-to-end execution that moved the needle. Their campaign insights and creative tests delivered consistent growth."</p>
+                    <div class="flex text-yellow-500 mt-3">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2">August 2025</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Carousel Dots -->
+        <div class="flex justify-center mt-6 space-x-2">
+            <div class="w-3 h-3 bg-gamestorm-red rounded-full"></div>
+            <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+            <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+            <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
+        </div>
+    </div>
+
+
+    <!-- Section 7: News & Dev Log (photo13.png) -->
+    <div id="news" class="max-w-7xl mx-auto py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-extrabold text-gray-900 text-center mb-12">
+            News & Dev Log
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- News Card 1: USAID Award -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-green-500">
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Global Winners of USAID Green Alliance Gaming Challenge Award</h3>
+                <p class="text-sm text-gray-500 mb-4">In a landmark achievement for Pakistan's gaming and technology sector, The Game Storm Studios (Pvt) Ltd. has been named among the Top 3...</p>
+                <!-- Placeholder for the small image/certificate -->
+                <div class="bg-gray-100 h-32 flex items-center justify-center rounded-lg mb-4">
+                    <img src="https://placehold.co/100x70/e5e7eb/374151?text=Certificate" alt="Award Certificate Placeholder" class="max-h-full max-w-full p-2">
+                </div>
+                <div class="flex justify-end text-gray-500 text-sm hover:text-gamestorm-red cursor-pointer">
+                    <i class="fas fa-share-alt mr-2 pt-1"></i>Share
+                </div>
+            </div>
+
+            <!-- News Card 2: Best Software House by LCCI -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-yellow-500">
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Game Storm Studios Named Pakistan's Best Software House for 2022 by LCCI</h3>
+                <p class="text-sm text-gray-500 mb-4">The Game Storm Studios (Pvt) Lt. one of Pakistan's leading mobile game development companies, has been recognized by the Lahore Chamber of...</p>
+                <!-- Placeholder for the trophy image -->
+                <div class="bg-gray-100 h-32 flex items-center justify-center rounded-lg mb-4">
+                    <img src="https://placehold.co/80x120/e5e7eb/374151?text=Trophy" alt="Trophy Placeholder" class="max-h-full max-w-full p-2">
+                </div>
+                <div class="flex justify-end text-gray-500 text-sm hover:text-gamestorm-red cursor-pointer">
+                    <i class="fas fa-share-alt mr-2 pt-1"></i>Share
+                </div>
+            </div>
+
+            <!-- News Card 3: Presidential Award -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-blue-500">
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Presidential Award for Pakistan's Best Software House, The Game Storm...</h3>
+                <p class="text-sm text-gray-500 mb-4">The Game Storm Studios (Pvt) Ltd. has been recognized among Pakistan's leading technology innovators, received the Presidential Award for Bes...</p>
+                <!-- Placeholder for the trophy image -->
+                <div class="bg-gray-100 h-32 flex items-center justify-center rounded-lg mb-4">
+                    <img src="https://placehold.co/80x120/e5e7eb/374151?text=Trophy" alt="Trophy Placeholder" class="max-h-full max-w-full p-2">
+                </div>
+                <div class="flex justify-end text-gray-500 text-sm hover:text-gamestorm-red cursor-pointer">
+                    <i class="fas fa-share-alt mr-2 pt-1"></i>Share
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-12">
+            <button class="bg-gray-900 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-700 transition duration-300 shadow-lg">
+                View All News
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Section 8: Contact Form (photo11.png) -->
+    <div id="contact-form" class="relative bg-white py-16 sm:py-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Left: Form -->
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-8">
+                        Share your project idea with us
+                    </h2>
+                    <form action="#" method="POST" class="space-y-6">
+                        <!-- Name -->
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Enter your name" class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-gamestorm-red focus:border-gamestorm-red transition duration-150">
+                        </div>
+                        <!-- Email Address -->
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-gamestorm-red focus:border-gamestorm-red transition duration-150">
+                        </div>
+                        <!-- Topic/Category -->
+                        <div>
+                            <label for="topic" class="block text-sm font-medium text-gray-700">Topic</label>
+                            <select id="topic" name="topic" class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-gamestorm-red focus:border-gamestorm-red transition duration-150 appearance-none bg-white">
+                                <option>Select Category</option>
+                                <option>Game Development</option>
+                                <option>App Development</option>
+                                <option>Marketing & UA</option>
+                                <option>General Inquiry</option>
+                            </select>
+                        </div>
+                        <!-- Contact Number -->
+                        <div>
+                            <label for="contact-number" class="block text-sm font-medium text-gray-700">Contact Number</label>
+                            <input type="text" id="contact-number" name="contact-number" placeholder="e.g. +92 300 1234567" class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-gamestorm-red focus:border-gamestorm-red transition duration-150">
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Right: Project Details, Document, Captcha -->
+                <div>
+                    <!-- Project Details -->
+                    <div>
+                        <label for="project-details" class="block text-sm font-medium text-gray-700">Project Details</label>
+                        <textarea id="project-details" name="project-details" rows="5" placeholder="Describe your project..." class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-gamestorm-red focus:border-gamestorm-red transition duration-150"></textarea>
+                    </div>
+
+                    <!-- Document Upload -->
+                    <div class="mt-6">
+                        <label for="document" class="block text-sm font-medium text-gray-700">Document</label>
+                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                            <div class="space-y-1 text-center">
+                                <i class="fas fa-upload text-3xl text-gray-400"></i>
+                                <div class="flex text-sm text-gray-600">
+                                    <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-gamestorm-red hover:text-red-700 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-gamestorm-red">
+                                        <span>Click to upload or drag and drop</span>
+                                        <input id="file-upload" name="file-upload" type="file" class="sr-only">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Captcha & Submit Button -->
+                    <div class="flex items-center justify-between mt-6">
+                        <!-- Simple Captcha Placeholder -->
+                        <div class="flex items-center space-x-2 border border-gray-300 p-2 rounded-md">
+                            <input type="checkbox" id="robot-check" class="h-5 w-5 rounded border-gray-300 text-gamestorm-red focus:ring-gamestorm-red">
+                            <label for="robot-check" class="text-sm text-gray-700">I'm not a robot</label>
+                            <img src="https://placehold.co/60x30/ffffff/555555?text=reCAPTCHA" alt="reCAPTCHA Placeholder" class="h-7">
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="bg-gamestorm-red text-white text-lg font-bold py-3 px-10 rounded-lg hover:bg-red-700 transition duration-300 shadow-xl">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Contact Character (photo11.png) -->
+        <img src="https://placehold.co/400x400/f0f0f0/333333?text=3D+Contact+Character" alt="3D Contact Character" class="contact-character hidden lg:block" />
+    </div>
+
+
+    <!-- Footer - Split into two sections (photo14.png & photo15.png) -->
+    <div class="bg-white border-t border-gray-200 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-8 text-gray-700">
+            <!-- Explore -->
+            <div>
+                <h4 class="text-lg font-bold text-gray-900 mb-4">Explore</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#library" class="hover:text-gamestorm-red transition duration-150">Games</a></li>
+                    <li><a href="#" class="hover:text-gamestorm-red transition duration-150">Community</a></li>
+                    <li><a href="#" class="hover:text-gamestorm-red transition duration-150">Careers</a></li>
+                    <li><a href="#" class="hover:text-gamestorm-red transition duration-150">Support</a></li>
+                </ul>
+            </div>
+            <!-- Legal -->
+            <div>
+                <h4 class="text-lg font-bold text-gray-900 mb-4">Legal</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-gamestorm-red transition duration-150">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-gamestorm-red transition duration-150">Terms of Service</a></li>
+                    <li><a href="#" class="hover:text-gamestorm-red transition duration-150">Cookie Policy</a></li>
+                </ul>
+            </div>
+            <!-- Follow Us (Social Icons) -->
+            <div class="col-span-2 md:col-span-1 lg:col-span-1">
+                <h4 class="text-lg font-bold text-gray-900 mb-4">Follow Us</h4>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-white bg-blue-600 p-3 rounded-full hover:bg-blue-800 transition duration-150"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-white bg-gray-900 p-3 rounded-full hover:bg-gray-700 transition duration-150"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-white bg-pink-600 p-3 rounded-full hover:bg-pink-800 transition duration-150"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-white bg-red-600 p-3 rounded-full hover:bg-red-800 transition duration-150"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer Bottom - Offices and Contact Info (photo15.png) -->
+    <footer class="bg-gamestorm-red text-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <h4 class="text-2xl font-bold mb-8">OFFICES</h4>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
+                <!-- Lahore Office -->
+                <div>
+                    <p class="font-bold mb-1">Lahore Office <span class="ml-1">🇵🇰</span></p>
+                    <p class="text-sm">15th Floor, Arfa Software Technology Park,</p>
+                    <p class="text-sm">346-B, Ferozepur Road, Lahore</p>
+                </div>
+                <!-- Karachi Office -->
+                <div>
+                    <p class="font-bold mb-1">Karachi Office <span class="ml-1">🇵🇰</span></p>
+                    <p class="text-sm">Office # 608, Parsa Tower,</p>
+                    <p class="text-sm">Shahra-e-Faisal Karachi, Pakistan.</p>
+                </div>
+                <!-- USA Office -->
+                <div>
+                    <p class="font-bold mb-1">USA Office <span class="ml-1">🇺🇸</span></p>
+                    <p class="text-sm">520 Smoke Tree Dr Murphy</p>
+                    <p class="text-sm">75094, Texas, USA</p>
+                </div>
+                <!-- Dubai Office -->
+                <div>
+                    <p class="font-bold mb-1">Dubai Office <span class="ml-1">🇦🇪</span></p>
+                    <p class="text-sm">308, Tiffany Tower, Cluster W,</p>
+                    <p class="text-sm">JLT, Dubai, UAE.</p>
+                </div>
+            </div>
+
+            <!-- Email and Phone -->
+            <div class="flex flex-col md:flex-row md:space-x-12 space-y-4 md:space-y-0 items-start">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-envelope text-xl"></i>
+                    <div>
+                        <p class="text-xs font-semibold uppercase">Email</p>
+                        <a href="mailto:info@thegamestormstudios.com" class="text-base hover:underline">info@thegamestormstudios.com</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-phone-alt text-xl"></i>
+                    <div>
+                        <p class="text-xs font-semibold uppercase">Phone</p>
+                        <a href="tel:+14099953386" class="text-base hover:underline">+1 409 9953 386</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="border-t border-red-700 mt-8 pt-4 text-center">
+                <p class="text-sm text-red-300">© 2025 Game Storm Studios. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
